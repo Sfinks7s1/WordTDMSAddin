@@ -28,12 +28,12 @@ namespace WordAddIn
         {
             try
             {
-                var WordApp = (Word.Application)System.Runtime.InteropServices.Marshal.GetActiveObject(activeApplication);
-                var WordDoc = WordApp.Documents.Application.ActiveDocument;
+                Word.Application WordApp = (Microsoft.Office.Interop.Word.Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Word.Application");
+                Word.Document WordDoc = WordApp.Documents.Application.ActiveDocument;
 
                 if (Path.GetDirectoryName(WordDoc.FullName) != string.Empty)
                 {
-                    if (Condition.StartCheckPath(WordDoc.FullName))
+                    if (Condition.CheckPathToTdms(WordDoc.FullName))
                     {
                         if (Condition.CheckTDMSProcess())
                         {
@@ -70,9 +70,9 @@ namespace WordAddIn
                     WordDoc.SaveAs2(SaveDialog());
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // ignored
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -91,12 +91,12 @@ namespace WordAddIn
         {
             try
             {
-                var WordApp = (Word.Application)System.Runtime.InteropServices.Marshal.GetActiveObject(activeApplication);
-                var WordDoc = WordApp.Documents.Application.ActiveDocument;
+                Word.Application WordApp = (Microsoft.Office.Interop.Word.Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Word.Application");
+                Word.Document WordDoc = WordApp.Documents.Application.ActiveDocument;
 
                 if (Path.GetDirectoryName(WordDoc.FullName) != string.Empty)
                 {
-                    if (Condition.StartCheckPath(WordDoc.FullName))
+                    if (Condition.CheckPathToTdms(WordDoc.FullName))
                     {
                         if (Condition.CheckTDMSProcess())
                         {
@@ -142,9 +142,9 @@ namespace WordAddIn
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // ignored
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -157,10 +157,10 @@ namespace WordAddIn
         {
             try
             {
-                var WordApp = (Word.Application)System.Runtime.InteropServices.Marshal.GetActiveObject(activeApplication);
-                var WordDoc = WordApp.Documents.Application.ActiveDocument;
-                
-                if (Condition.StartCheckPath(WordDoc.FullName))
+                Word.Application WordApp = (Microsoft.Office.Interop.Word.Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Word.Application");
+                Word.Document WordDoc = WordApp.Documents.Application.ActiveDocument;
+
+                if (Condition.CheckPathToTdms(WordDoc.FullName))
                 {
                     if (Condition.CheckTDMSProcess())
                     {
@@ -189,9 +189,9 @@ namespace WordAddIn
                     WordDoc.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // ignored
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -260,10 +260,10 @@ namespace WordAddIn
             {
                 if (Condition.CheckTDMSProcess())
                 {
-                    var WordApp = (Word.Application)System.Runtime.InteropServices.Marshal.GetActiveObject(activeApplication);
-                    var wrdDoc = WordApp.Documents.Application.ActiveDocument;
+                    Word.Application WordApp = (Microsoft.Office.Interop.Word.Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Word.Application");
+                    Word.Document wrdDoc = WordApp.Documents.Application.ActiveDocument;
 
-                    if (Condition.StartCheckPath(wrdDoc.Path))
+                    if (Condition.CheckPathToTdms(wrdDoc.Path))
                     {
                         TDMSAttributes parAttrs = null;
                         var tdmsObj = new TDMSApplication().GetObjectByGUID(Condition.ParseGUID(wrdDoc.Path));
@@ -732,7 +732,7 @@ namespace WordAddIn
             }
             catch (Exception ex)
             {
-                Interaction.MsgBox(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
     }

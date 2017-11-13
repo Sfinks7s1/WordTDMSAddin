@@ -7,20 +7,29 @@ namespace WordAddIn
     public static class Condition
     {
         /// <summary>
-        /// Реаализует проверку принадлежности чертежа базе TDMS. Если путь сохранения файла не совпадает с путём C:\TEMP\ то метод возвращает false, в противном случае true.
+        /// Реализует проверку принадлежности чертежа базе TDMS. Если путь сохранения файла не совпадает с путём C:\TEMP\ то метод возвращает false, в противном случае true.
         /// Метод в качестве параметра принимает путь к файлу
         /// </summary>
-        private static bool CheckPath(string path)
-        {
-            return path.Contains(@"C:\Temp");
-        }
-
         /// <summary>
         /// Обёртка для метода CheckPath(path) с проверкой на пустой путь, если переданный путь пуст, то false, в противном случае true
         /// </summary>
-        public static bool StartCheckPath(string path)
+        public static bool CheckPathToTdms(string path)
         {
-            return path != string.Empty && CheckPath(path);
+            try
+            {
+                if (path == " " || path == string.Empty)
+                {
+                    return false;
+                }
+
+                path = path.Remove(7);
+               
+                return string.Equals(path, @"C:\Temp", StringComparison.InvariantCultureIgnoreCase);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -28,8 +37,7 @@ namespace WordAddIn
         /// </summary>
         public static bool CheckTDMSProcess()
         {
-            var process = Process.GetProcessesByName("TDMS");
-            return process.Length == 1;
+            return Process.GetProcessesByName("TDMS").Length == 1;
         }
 
         public static string ParseGUID(string pathName)

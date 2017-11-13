@@ -6,7 +6,7 @@ namespace WordAddIn
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            this.Application.DocumentOpen += Application_DocumentOpen;
+            //this.Application.DocumentOpen += Application_DocumentOpen;
         }
 
         private void Application_DocumentOpen(Word.Document Doc)
