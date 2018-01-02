@@ -11,7 +11,7 @@ namespace WordAddIn
 
         private void Application_DocumentOpen(Word.Document Doc)
         {
-            new TDMS().UpdateTDMSVariables();
+            //new TDMSControl().UpdateTDMSVariables();
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

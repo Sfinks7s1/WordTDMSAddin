@@ -1,13 +1,13 @@
 ﻿namespace WordAddIn
 {
-    partial class TDMS : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class TDMSControl : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        public TDMS()
+        public TDMSControl()
             : base(Globals.Factory.GetRibbonFactory())
         {
             InitializeComponent();
@@ -34,7 +34,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TDMS));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TDMSControl));
             this._tdms = this.Factory.CreateRibbonTab();
             this.Save = this.Factory.CreateRibbonGroup();
             this.btnSave = this.Factory.CreateRibbonButton();
@@ -195,9 +195,9 @@
 
     partial class ThisRibbonCollection
     {
-        internal TDMS RibbonControl
+        internal TDMSControl RibbonControl
         {
-            get { return this.GetRibbon<TDMS>(); }
+            get { return this.GetRibbon<TDMSControl>(); }
         }
     }
 }
